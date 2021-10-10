@@ -34,6 +34,8 @@ void disemvowel(FILE* inputFile, FILE* outputFile) {
 	 count_nonvowels = copy_non_vowels(chunk_size,inputBuffer,outputBuffer);
  	 fwrite(outputBuffer,sizeof(char),count_nonvowels,outputFile);
 	}
+    free(inputBuffer);
+    free(outputBuffer);
 }
 int main(int argc, char *argv[]) {
 	FILE *inputFile;
