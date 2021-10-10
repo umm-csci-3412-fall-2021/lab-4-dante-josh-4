@@ -31,25 +31,27 @@ void disemvowel(FILE* inputFile, FILE* outputFile) {
     int chunk_size = 1;
     while (chunk_size != 0) {
 	 chunk_size = fread(inputBuffer,sizeof(char),BUF_SIZE,inputFile);
-	 // printf("Chunk size = %d.\n", chunk_size);
 	 count_nonvowels = copy_non_vowels(chunk_size,inputBuffer,outputBuffer);
  	 fwrite(outputBuffer,sizeof(char),count_nonvowels,outputFile);
 	}
 }
 int main(int argc, char *argv[]) {
-	FILE *inputFile = stdin;
-        FILE *outputFile = stdout;
+	FILE *inputFile;
+        FILE *outputFile;
 	if(argc == 1){
+		inputFile = stdin;
+		outputFile = stdout;
 		disemvowel(inputFile, outputFile);
 	}
 	if(argc == 2){
 		inputFile = fopen(argv[1],"r+");
+		outputFile = stdout;
 		disemvowel(inputFile, outputFile);
 		fclose(inputFile);
 	}
 	if(argc == 3){
 		inputFile = fopen(argv[1],"r+");
-		outputFile = fopen(argv[2], "r+");
+		outputFile = fopen(argv[2], "w+");
     		disemvowel(inputFile, outputFile);
 		fclose(inputFile);
 		fclose(outputFile);
